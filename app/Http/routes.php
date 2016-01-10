@@ -47,24 +47,22 @@ Route::group(['middleware' => ['web']], function () {
 
 	//cart routes
 
-	Route::auth();
-
 	Route::group(['middleware' => ['auth']], function () {
 
 		Route::get('/blog','PostController@index');
 		//Blog Posts
-		Route::get('/blog/post/{id}',[ 'as' => 'blogpost' ,'uses' => 'PostController@show']);
+		Route::get('/blog/post/{id}',[ 'as' => 'blogpost' ,'uses' => 'PostController@show'])->where('id', '[0-9]+');
 
 		// show new post form
 		Route::get('new-post','PostController@create');
 		//save the posts
 		Route::post('new-post','PostController@save');
  		// edit post form
-		Route::get('edit/{slug}','PostController@edit');
+		Route::get('edit/{id}','PostController@edit');
 		// update post
 		Route::post('update','PostController@update');
  		// delete post
-		Route::get('delete/{id}','PostController@destroy');
+		Route::get('delete/{id}','PostController@destroy')->where('id', '[0-9]+');;
 
 		//User Blog Posts
  		// display user's all posts
@@ -74,7 +72,7 @@ Route::group(['middleware' => ['web']], function () {
  		// add comment
 		Route::post('comment/add','CommentController@store');
  		// delete comment
-		Route::post('comment/delete/{id}','CommentController@distroy');
+		Route::post('comment/delete/{id}','CommentController@distroy')->where('id', '[0-9]+');
 		//users profile
 		Route::get('user/{id}','UserController@profile')->where('id', '[0-9]+');
 		// display list of posts
@@ -87,8 +85,6 @@ Route::group(['middleware' => ['web']], function () {
 		Route::get('/clear-cart', 'CartController@clear_cart');
 		//Checkout
 		Route::get('/checkout','CartController@checkout');
-
-
 	});
 
 });

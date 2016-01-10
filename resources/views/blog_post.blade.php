@@ -11,9 +11,6 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-3">
-                <div class="left-sidebar">
-                    @include('shared.sidebar')
-                </div>
             </div>
             <div class="col-sm-9">
                 <div class="blog-post-area">
@@ -26,16 +23,14 @@
                                <li><i class="fa fa-clock-o"></i>{{$post->created_at->format(' h:i a') }} </li>
                                <li><i class="fa fa-calendar"></i>{{$post->created_at->format('M d,Y') }} </li>
                            </ul>
-
                        </div>
-                       <img src="{{asset('images/blog/blog-one.jpg')}}" alt="">
                        <p>{{$post->body}}</p>
                    </div>
                    </div><!--/blog-post-area-->
                <div class="response-area">
                   <ul class="media-list">
                       <h2>{{count($post->comments)}} Comments</h2>
-                      @foreach ($comments as $comment) 
+                      @foreach ($post->comments as $comment) 
 
                       <li class="media">
                         <div class="media-body">

@@ -36,11 +36,12 @@ class ContactController extends Controller
 			{
 				Mail::send('emails.feedback', $data, function ($m) use ($data)
 				{
-					$m->from('from@example.com', 'Example');               
+				 
 					$m->to('test@example.com')->subject('feedback form');
 				});
 			}
 			catch (Exception $e) {
+				
 				return Redirect::to('/contact-us')->withErrors('Sorry there was an error sending the message please try again');
 			}
             // Redirect to page
