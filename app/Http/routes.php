@@ -52,13 +52,43 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::group(['middleware' => ['auth']], function () {
 
-	Route::get('/cart', 'CartController@cart');
-	Route::post('/cart', 'CartController@cart');
-	//Route::post('/cart-remove-item', 'CartController@cart_remove_item');
-	Route::get('/clear-cart', 'CartController@clear_cart');
-	
-	
-});
-Route::get('/checkout','CartController@checkout');
+
+		//Blog Posts
+		// show new post 
+		Route::get('new-post','PostController@create');
+		//save the posts
+		Route::post('new-post','PostController@save');
+ 		// edit post form
+		Route::get('edit/{slug}','PostController@edit');
+		// update post
+		Route::post('update','PostController@update');
+ 		// delete post
+		Route::get('delete/{id}','PostController@destroy');
+
+		//User Blog Posts
+ 		// display user's all posts
+		Route::get('my-all-posts','UserController@user_posts_all');
+ 		// display user's drafts
+		Route::get('my-drafts','UserController@user_posts_draft');
+ 		// add comment
+		Route::post('comment/add','CommentController@store');
+ 		// delete comment
+		Route::post('comment/delete/{id}','CommentController@distroy');
+		//users profile
+		Route::get('user/{id}','UserController@profile')->where('id', '[0-9]+');
+		// display list of posts
+		Route::get('user/{id}/posts','UserController@user_posts')->where('id', '[0-9]+');
+
+
+		// Cart Routes
+		Route::get('/cart', 'CartController@cart');
+		Route::post('/cart', 'CartController@cart');
+		Route::get('/clear-cart', 'CartController@clear_cart');
+		//Checkout
+		Route::get('/checkout','CartController@checkout');
+
+
+	});
+
 });
 
