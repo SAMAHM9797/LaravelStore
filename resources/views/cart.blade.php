@@ -29,7 +29,7 @@
                      </td>
 
                      <td class="cart_price">
-                        <p>${{$item->price}}</p>
+                        <p>£{{$item->price}}</p>
                     </td>
                     <td class="cart_quantity">
                         <div class="cart_quantity_button">
@@ -40,7 +40,7 @@
                       </div>
                   </td>
                   <td class="cart_total">
-                    <p class="cart_total_price">${{$item->subtotal}}</p>
+                    <p class="cart_total_price">£{{$item->subtotal}}</p>
                 </td>
 
             </tr>
@@ -63,7 +63,7 @@
         <div class="col-sm-6">
             <div class="total_area">
                 <ul>
-                    <li>Total <span>${{Cart::total()}}</span></li>
+                    <li>Total <span>£{{Cart::total()}}</span></li>
                 </ul>
                 <a class="btn btn-default update" href="{{url('clear-cart')}}">Clear Cart</a>
                 <a class="btn btn-default check_out" href="{{url('checkout')}}">Check Out</a>
