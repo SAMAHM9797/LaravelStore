@@ -56,9 +56,9 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('/cart', 'CartController@cart');
 	//Route::post('/cart-remove-item', 'CartController@cart_remove_item');
 	Route::get('/clear-cart', 'CartController@clear_cart');
-	Route::get('/checkout','CartController@checkout');
+	
 	
 });
-
+Route::get('/checkout','CartController@checkout');
 });
 
