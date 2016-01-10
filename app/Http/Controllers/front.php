@@ -16,13 +16,10 @@ use Cart;
 use Illuminate\Pagination\LengthAwarePaginator;
 class Front extends Controller {
 
-	// Hold data from the respective models
+	// Hold data from the models;
     var $brands;
     var $categories;
     var $products;
-    //title and meta description for SEO
-    var $title;
-    var $description;
 
     public function __construct() {
         $this->brands = Brand::all();
@@ -44,19 +41,15 @@ class Front extends Controller {
 
         $this->products->load("categories","brands");
         $detailedProduct = Product::with("categories","brands")->find($id);
-        if(!$detailedProduct)
-        {
-            return redirect('/products')->withErrors('requested page not found');
-        }
-        return view('product_details', array('detailedProduct' => $detailedProduct,'page' => 'products', 'categories' => $this->categories,'brands' => $this->brands,'products' => $this->products));
+            return view('product_details', array('detailedProduct' => $detailedProduct,'page' => 'products', 'categories' => $this->categories,'brands' => $this->brands,'products' => $this->products));
     }
 
-    public function product_categories($name) {
+    public function product_categories($id) {
         return view('products', array('title' => 'Welcome','description' => '','page' => 'products', 'brands' => $this->brands, 'categories' => $this->categories, 'products' => $this->products));
     }
 
-    public function product_brands($name) {
-        $products = Product::where('brand_id',$name)->paginate(9);
+    public function product_brands($id) {
+        $products = Product::where('brand_id',$id)->paginate(9);
         return view('products', array('brands' => $this->brands, 'categories' => $this->categories, 'products' => $products));
     }
 

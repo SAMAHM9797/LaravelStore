@@ -12,7 +12,7 @@
         </div>
     </div>
 </div>
-
+-->
 <div class="brands_products">
     <h2>Brands</h2>
     <div class="brands-name">
@@ -22,5 +22,5 @@
            @endforeach
        </ul>
    </div>
-</div><!--/brands_products-->
+</div>
 

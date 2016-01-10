@@ -11,9 +11,6 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-3">
-                <div class="left-sidebar">
-                    @include('shared.sidebar')
-                </div>
             </div>
             <div class="col-sm-9">
                 <div class="blog-post-area">
@@ -33,7 +30,7 @@
                <div class="response-area">
                   <ul class="media-list">
                       <h2>{{count($post->comments)}} Comments</h2>
-                      @foreach ($comments as $comment) 
+                      @foreach ($post->comments as $comment) 
 
                       <li class="media">
                         <div class="media-body">

@@ -18,29 +18,22 @@ use Auth;
 
 class PostController extends Controller
 {
-		// Hold data from the respective models
-	var $brands;
-	var $categories;
-	var $products;
-
-	public function __construct() {
-		$this->brands = Brand::all();
-		$this->categories = Category::all();
-		$this->products = Product::all();
-	}
+	
 
 	public function index()
 	{
 		$posts = Post::orderBy('created_at','desc')->paginate(5);
-
-		return view('blog', array('posts' => $posts, 'brands' => $this->brands, 'categories' => $this->categories, 'products' => $this->products));
+		return view('blog')->withPosts($posts);
 	}
 
 	public function show($id)
 	{
-	    $post = Post::With("comments")->find($id);
-	    $comments = $post->comments;
-		return view('blog_post', array('post' => $post, 'brands' => $this->brands, 'comments' => $comments, 'categories' => $this->categories, 'products' => $this->products));
+		$post = Post::With("comments")->find($id);
+		if($post)
+		{
+			return view('blog_post')->withPost($post);
+		}
+		return Redirect::action('PostController@index');
 	}
 
 	public function create(Request $request)
