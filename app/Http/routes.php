@@ -32,8 +32,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/products/details/{id}','Front@product_details');
 	Route::get('/products/categories/{name}','Front@product_categories');
 	Route::get('/products/brands/{name}/','Front@product_brands');
-	Route::get('/blog','Front@blog');
-	Route::get('/blog/post/{id}','Front@blog_post');
+
 	Route::post('/contact-us','ContactController@SubmitContactUsForm');
 	Route::get('/contact-us','Front@GetContactUsForm');	
 
@@ -52,9 +51,11 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::group(['middleware' => ['auth']], function () {
 
-
+		Route::get('/blog','PostController@index');
 		//Blog Posts
-		// show new post 
+		Route::get('/blog/post/{id}',[ 'as' => 'blogpost' ,'uses' => 'PostController@show']);
+
+		// show new post form
 		Route::get('new-post','PostController@create');
 		//save the posts
 		Route::post('new-post','PostController@save');

@@ -16,4 +16,4 @@ class Comments extends Model
 		return $this->belongsTo('App\Posts','post_id');
 	}
 }
-}
+

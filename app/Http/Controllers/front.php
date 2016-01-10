@@ -32,18 +32,22 @@ class Front extends Controller {
 
     public function index() {
         $this->products->load("brands","categories");
-        return view('main', array('title' => 'Welcome','description' => '','page' => 'home', 'brands' => $this->brands, 'categories' => $this->categories, 'products' => $this->products));
+        return view('main', array('brands' => $this->brands, 'categories' => $this->categories, 'products' => $this->products));
     }
 
     public function products() {
         $products = Product::paginate(9);
-        return view('products', array('title' => 'Products Listing','description' => '','page' => 'products', 'brands' => $this->brands, 'categories' => $this->categories, 'products' => $products));
+        return view('products', array('brands' => $this->brands, 'categories' => $this->categories, 'products' => $products));
     }
 
     public function product_details($id) {
 
         $this->products->load("categories","brands");
         $detailedProduct = Product::with("categories","brands")->find($id);
+        if(!$detailedProduct)
+        {
+            return redirect('/products')->withErrors('requested page not found');
+        }
         return view('product_details', array('detailedProduct' => $detailedProduct,'page' => 'products', 'categories' => $this->categories,'brands' => $this->brands,'products' => $this->products));
     }
 
@@ -53,13 +57,11 @@ class Front extends Controller {
 
     public function product_brands($name) {
         $products = Product::where('brand_id',$name)->paginate(9);
-       // $products = DB::table('products')->where('brand_id', $name)->get();
-        return view('products', array('title' => 'Welcome','description' => '','page' => 'products', 'brands' => $this->brands, 'categories' => $this->categories, 'products' => $products));
+        return view('products', array('brands' => $this->brands, 'categories' => $this->categories, 'products' => $products));
     }
 
     public function GetContactUsForm() {
-        return view('contact_us', array('title' => 'Contact us','description' => '','page' => 'contact', 'brands' => $this->brands, 'categories' => $this->categories, 'products' => $this->products));
+        return view('contact_us', array('brands' => $this->brands, 'categories' => $this->categories, 'products' => $this->products));
     }
-
 
 }
