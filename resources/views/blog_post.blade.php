@@ -26,9 +26,7 @@
                                <li><i class="fa fa-clock-o"></i>{{$post->created_at->format(' h:i a') }} </li>
                                <li><i class="fa fa-calendar"></i>{{$post->created_at->format('M d,Y') }} </li>
                            </ul>
-
                        </div>
-                       <img src="{{asset('images/blog/blog-one.jpg')}}" alt="">
                        <p>{{$post->body}}</p>
                    </div>
                    </div><!--/blog-post-area-->
