@@ -55,23 +55,4 @@ class PostController extends Controller
 		}
 	}
 
-	public function Save(PostFormRequest $request)
-	{
-		$post = new Posts();
-		$post->title = $request->get('title');
-		$post->body = $request->get('body');
-		$post->author_id = $request->user()->id;
-		if($request->has('save'))
-		{
-			$post->active = 0;
-			$message = 'Post saved successfully';            
-		}            
-		else 
-		{
-			$post->active = 1;
-			$message = 'Post published successfully';
-		}
-		$post->save();
-		return redirect('edit/'.$post->slug)->withMessage($message);
-	}
 }
